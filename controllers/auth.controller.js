@@ -1,7 +1,6 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
-import validator from "validator";
-
+import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(10);
@@ -26,8 +25,15 @@ export const login = async (req, res) => {
       return res.status(404).send("Wrong password or username");
     }
 
+    const token = jwt.sign(
+      {
+        id: user._id,
+        isSeller: user.isSeller,
+      },
+      process.env.JWT_KEY
+    );
     const { password, ...info } = user._doc;
-    res.status(200).send(info);
+    res.cookie("accessToken", token, { httpOnly: true }).status(200).send(info);
   } catch (err) {
     res.status(500).send("Something went wrong");
   }
