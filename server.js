@@ -15,12 +15,14 @@ mongoose.set("strictQuery", true);
 
 const connect = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/ITPMearn");
+    await mongoose.connect(process.env.MONGO);
     console.log("Connected to mongo DB");
   } catch (error) {
     console.log(error);
   }
 };
+
+app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
