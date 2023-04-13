@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 import userRoute from "./routes/user.route.js";
 import conversationRoute from "./routes/conversation.route.js";
 import gigRoute from "./routes/gig.route.js";
@@ -11,6 +12,7 @@ import authRoute from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
+
 dotenv.config();
 mongoose.set("strictQuery", true);
 
@@ -23,6 +25,12 @@ const connect = async () => {
   }
 };
 
+app.use(
+  cors({
+    // that is mean only this domain has permission to access on this api 'www.iti.com'
+    // origin: "http://localhost:8888",
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -34,7 +42,14 @@ app.use("/api/messages", messageRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/reviews", reviewRoute);
 
-app.listen(8800, () => {
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something went wrong";
+
+  return res.status(errorStatus).send(errorMessage);
+});
+
+app.listen(8888, () => {
   connect();
   console.log("Backend server is running!");
 });

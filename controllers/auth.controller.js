@@ -1,7 +1,9 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-export const register = async (req, res) => {
+import createError from "../utils/createError.js";
+
+export const register = async (req, res, next) => {
   try {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt);
@@ -9,20 +11,23 @@ export const register = async (req, res) => {
     await newUser.save();
     res.status(201).send("user has been created");
   } catch (err) {
-    res.status(500).send("Something went wrong!");
+    next(err);
   }
 };
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
+    // const err = new Error();
+    // err.status = 404;
+    // err.message = "User not found";
     if (!user) {
-      return res.status(404).send("User not found");
+      return next(createError(404, "User not found"));
     }
 
     const isCorrect = bcrypt.compareSync(req.body.password, user.password);
     if (!isCorrect) {
-      return res.status(404).send("Wrong password or username");
+      return next(createError(400, "Wrong password or username"));
     }
 
     const token = jwt.sign(
@@ -35,10 +40,16 @@ export const login = async (req, res) => {
     const { password, ...info } = user._doc;
     res.cookie("accessToken", token, { httpOnly: true }).status(200).send(info);
   } catch (err) {
-    res.status(500).send("Something went wrong");
+    next(createError(500, "Something went wrong"));
   }
 };
 
 export const logout = async (req, res) => {
-  res.send("From Auth Controller");
+  res
+    .clearCookie("accessToken", {
+      sameSite: "none",
+      secure: true,
+    })
+    .status(200)
+    .send("User has been logged out");
 };
