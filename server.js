@@ -25,12 +25,12 @@ const connect = async () => {
   }
 };
 
-app.use(
-  cors({
-    // that is mean only this domain has permission to access on this api 'www.iti.com'
-    // origin: "http://localhost:8888",
-  })
-);
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
