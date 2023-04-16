@@ -10,7 +10,7 @@ import { verifyToken } from "../middleware/jwt.js";
 
 router.post("/", verifyToken, createNewGig);
 router.delete("/:id", verifyToken, deleteGig);
-router.get("/single/:id", verifyToken, getGig);
-router.get("/", verifyToken, getGigs);
+router.get("/single/:id", getGig);
+router.get("/", getGigs);
 
 export default router;
