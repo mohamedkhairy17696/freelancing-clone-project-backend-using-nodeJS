@@ -31,8 +31,16 @@ const GigSchema = new Schema(
       type: String,
       required: true,
     },
-    images: {
-      type: [String],
+    imageSlide1: {
+      type: String,
+      required: false,
+    },
+    imageSlide2: {
+      type: String,
+      required: false,
+    },
+    imageSlide3: {
+      type: String,
       required: false,
     },
     userId: {
@@ -55,8 +63,20 @@ const GigSchema = new Schema(
       type: Number,
       required: true,
     },
-    features: {
-      type: [String],
+    feature1: {
+      type: String,
+      required: false,
+    },
+    feature2: {
+      type: String,
+      required: false,
+    },
+    feature3: {
+      type: String,
+      required: false,
+    },
+    feature4: {
+      type: String,
       required: false,
     },
     sales: {

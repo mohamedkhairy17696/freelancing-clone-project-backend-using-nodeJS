@@ -29,9 +29,13 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    responseTime: {
+      type: Number,
+      required: false,
+    },
     desc: {
       type: String,
-      required: false,
+      required: true,
     },
     isSeller: {
       type: Boolean,
