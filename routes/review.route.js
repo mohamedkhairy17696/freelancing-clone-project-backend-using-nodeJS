@@ -1,7 +1,9 @@
 import express from "express";
+import { createReview } from "../controllers/review.controller.js";
+import { verifyToken } from "../middleware/jwt.js";
 const router = express.Router();
-import { fn } from "../controllers/review.controller.js";
 
-router.get("/test", fn);
+router.post("/", verifyToken, createReview);
+router.get("/:gigId", getReviews);
 
 export default router;
