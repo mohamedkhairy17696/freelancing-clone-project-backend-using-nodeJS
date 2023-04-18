@@ -19,7 +19,7 @@ const GigSchema = new Schema(
       type: Number,
       default: 0,
     },
-    cat: {
+    catId: {
       type: String,
       required: true,
     },

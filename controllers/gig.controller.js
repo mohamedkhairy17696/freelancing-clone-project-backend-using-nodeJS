@@ -47,6 +47,7 @@ export const getGigs = async (req, res, next) => {
   const query = req.query;
   const filters = {
     ...(query.userId && { userId: query.userId }),
+    ...(query.catId && { catId: query.catId }),
     ...(query.cat && { cat: query.cat }),
     ...((query.min || query.max) && {
       price: {
