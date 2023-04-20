@@ -1,5 +1,4 @@
 import express from "express";
-const router = express.Router();
 import {
   createNewCat,
   deleteCat,
@@ -7,6 +6,7 @@ import {
   getCats,
 } from "../controllers/cat.controller.js";
 import { verifyToken } from "../middleware/jwt.js";
+const router = express.Router();
 
 router.post("/", createNewCat);
 router.delete("/:id", deleteCat);
