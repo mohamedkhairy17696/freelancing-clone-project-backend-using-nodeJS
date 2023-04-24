@@ -23,17 +23,13 @@ const GigSchema = new Schema(
       type: Number,
       default: 0,
     },
-    // catId: {
-    //   type: String,
-    //   required: true,
-    // },
-    // catTitle: {
-    //   type: String,
-    //   required: true,
-    // },
     cat: {
       type: String,
       required: true,
+    },
+    catImage: {
+      type: String,
+      required: false,
     },
     price: {
       type: Number,
@@ -90,6 +86,10 @@ const GigSchema = new Schema(
     sales: {
       type: Number,
       default: 0,
+    },
+    catId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Cat",
     },
   },
   {
