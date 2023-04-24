@@ -58,6 +58,17 @@ export const getOrdersDashboard = async (req, res, next) => {
   }
 };
 
+export const deleteOrderById = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    await Order.findByIdAndDelete(req.params.id);
+    res.status(200).send(order);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const confirm = async (req, res, next) => {
   try {
     const orders = await Order.findOneAndUpdate(

@@ -31,6 +31,17 @@ export const deleteGig = async (req, res, next) => {
   }
 };
 
+export const deleteGigDashboard = async (req, res, next) => {
+  try {
+    const gig = await GigModel.findById(req.params.id);
+
+    await GigModel.findByIdAndDelete(req.params.id);
+    res.status(200).send(gig);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const getGig = async (req, res, next) => {
   try {
     const foundedgig = await GigModel.findById(req.params.id);
