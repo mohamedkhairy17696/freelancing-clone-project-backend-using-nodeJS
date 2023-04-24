@@ -87,10 +87,6 @@ const GigSchema = new Schema(
       type: Number,
       default: 0,
     },
-    // catId: {
-    //   type: mongoose.SchemaTypes.ObjectId,
-    //   ref: "Cat",
-    // },
   },
   {
     timestamps: true,

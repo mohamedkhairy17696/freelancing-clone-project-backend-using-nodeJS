@@ -13,4 +13,7 @@ router.delete("/:id", verifyToken, deleteGig);
 router.get("/single/:id", getGig);
 router.get("/", getGigs);
 
+router.get("/dashboard", getGigs);
+router.delete("/dashboard/:id", deleteGig);
+
 export default router;
