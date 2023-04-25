@@ -45,8 +45,7 @@ export const updateConversation = async (req, res, next) => {
       { id: req.params.id },
       {
         $set: {
-          // readBySeller: true,
-          // readByBuyer: true,
+          // When updating a conversation I want to make it read (Updated will happen by a button and mark message as read)
           ...(req.isSeller ? { readBySeller: true } : { readByBuyer: true }),
         },
       },
