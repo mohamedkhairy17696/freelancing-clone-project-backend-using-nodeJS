@@ -21,4 +21,4 @@ const MessageSchema = new Schema(
   }
 );
 
-export default ("Message", MessageSchema);
+export default mongoose.model("Message", MessageSchema);

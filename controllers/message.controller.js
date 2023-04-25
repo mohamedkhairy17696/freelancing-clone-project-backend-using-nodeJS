@@ -1,16 +1,16 @@
-import MessageModel from "../models/message.model.js";
-import conversationModel from "../models/conversation.model.js";
 import createError from "../utils/createError.js";
+import Message from "../models/message.model.js";
+import Conversation from "../models/conversation.model.js";
 
-export const createNewMessage = async (req, res, next) => {
-  const newMessage = new MessageModel({
+export const createMessage = async (req, res, next) => {
+  const newMessage = new Message({
     conversationId: req.body.conversationId,
     userId: req.userId,
     desc: req.body.desc,
   });
   try {
     const savedMessage = await newMessage.save();
-    await conversationModel.findOneAndUpdate(
+    await Conversation.findOneAndUpdate(
       { id: req.body.conversationId },
       {
         $set: {
@@ -21,12 +21,17 @@ export const createNewMessage = async (req, res, next) => {
       },
       { new: true }
     );
+
     res.status(201).send(savedMessage);
   } catch (err) {
     next(err);
   }
 };
-
 export const getMessages = async (req, res, next) => {
-  res.send("From Message Controller");
+  try {
+    const messages = await Message.find({ conversationId: req.params.id });
+    res.status(200).send(messages);
+  } catch (err) {
+    next(err);
+  }
 };
