@@ -22,8 +22,11 @@ export const login = async (req, res, next) => {
       return next(createError(404, "User not found"));
     }
 
-    const isCorrect = bcrypt.compareSync(req.body.password, user.password);
-    if (!isCorrect) {
+    const isCorrectPassword = bcrypt.compareSync(
+      req.body.password,
+      user.password
+    );
+    if (!isCorrectPassword) {
       return next(createError(400, "Wrong password"));
     }
 
