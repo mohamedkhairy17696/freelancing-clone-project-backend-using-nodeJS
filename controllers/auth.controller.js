@@ -8,6 +8,7 @@ export const register = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt);
     const newUser = new User({ ...req.body, password: hash });
+
     await newUser.save();
     res.status(201).send("user has been created...");
   } catch (err) {
