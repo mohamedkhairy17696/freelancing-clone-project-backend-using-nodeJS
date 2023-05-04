@@ -21,7 +21,7 @@ export const deleteGig = async (req, res, next) => {
   try {
     const foundedgig = await GigModel.findById(req.params.id);
     if (foundedgig.userId !== req.userId) {
-      return next(createError(403, "You can delete only your gig"));
+      return next(createError(403, "You can't delete this gig"));
     }
 
     await GigModel.findByIdAndDelete(req.params.id);
