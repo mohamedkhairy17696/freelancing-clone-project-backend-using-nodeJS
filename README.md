@@ -3,7 +3,7 @@ To run the backend you need to create a new DB and add your .env file to your cl
 
 on .env file add that keys:
 
-MONGOURI= mongodb+srv://addyourusername:addyourpassword@addyourcluster.gnkbrfx.mongodb.net/?retryWrites=true&w=majority
+MONGOURI= Your mongo database connect key
   
 JWT_KEY= YourJWTSecretKey
   
