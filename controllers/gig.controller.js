@@ -68,7 +68,7 @@ export const getGigs = async (req, res, next) => {
     ...(query.search && { title: { $regex: query.search, $options: "i" } }),
   };
   try {
-    const foundedGigs = await GigModel.find(filters).sort({ [query.sort]: -1 });
+    const foundedGigs = await GigModel.find(filters).sort({ updatedAt: -1 });
     res.status(200).send(foundedGigs);
   } catch (err) {
     next(err);
