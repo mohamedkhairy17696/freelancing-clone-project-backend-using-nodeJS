@@ -37,7 +37,7 @@ export const getOrders = async (req, res, next) => {
     const orders = await Order.find({
       ...(req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }),
       isCompleted: true,
-    });
+    }).sort({ updatedAt: -1 });
 
     res.status(200).send(orders);
   } catch (err) {
