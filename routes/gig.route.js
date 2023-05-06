@@ -10,11 +10,11 @@ import { verifyToken } from "../middleware/jwt.js";
 const router = express.Router();
 
 router.post("/", verifyToken, createNewGig);
-router.delete("/:id", verifyToken, deleteGig);
 router.get("/single/:id", getGig);
 router.get("/", getGigs);
+router.delete("/:id", verifyToken, deleteGig);
 
 router.get("/dashboard", getGigs);
-router.delete("/dashboard/:id", deleteGigDashboard);
+// router.delete("/dashboard/:id", deleteGigDashboard);
 
 export default router;
