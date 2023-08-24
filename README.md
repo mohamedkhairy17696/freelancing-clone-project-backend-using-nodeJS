@@ -1,10 +1,7 @@
-# my-grad-project-ITI-backend
-To run the backend you need to create a new DB and add your .env file to your clone project folder:
-
-on .env file add that keys:
-
-MONGOURI= Your mongo database connect key
-  
-JWT_KEY= YourJWTSecretKey
-  
-STRIPE= YourStripeNodeJSKey
+Features
+- Auth using JWT and Cookies
+- Filtration with params and filtration with query string
+- Routes For (Auth - Users  - Gigs -  - Orders - Reviews - Last meesages - Chat)
+- Stripe payment for making orders
+- React for frontend(client) https://github.com/mohamedkhairy17696/freelancing-website-clone-project-frontend-using-ReactJS-and-Tailwind-fully-responsive
+- Angular for dashboard https://github.com/mohamedkhairy17696/freelancing-clone-project-dashboard-using-Angular
